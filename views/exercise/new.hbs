@@ -1,8 +1,7 @@
 <h1>ADD YOUR EXERCISE</h1>
-ggfdgdfgdfgfds
 
 {{!-- /routine/details/5ccc47b841dd15bf711f5b77/new --}}
-<form action="/routine/details/:id{{routine.id}}/new" method="POST">
+<form action="/routine/details/{{currentUser.id}}/new" method="POST">
   <input type="text" name="name" placeholder="ex. Bench Press"><br>
   <input type="text" name="reps" placeholder="ex. 10"><br>
   <input type="text" name="sets" placeholder="ex. 5"><br>

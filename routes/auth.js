@@ -89,8 +89,7 @@ router.post("/signup", (req, res, next) => {
         password: hashPass,
         firstName,
         lastName,
-        email,
-        // allRoutines
+        email
       })
         .then(() => {
           res.redirect("/dashboard");
@@ -104,25 +103,13 @@ router.post("/signup", (req, res, next) => {
     })
 })
 
-
-// router.use((req, res, next) => {
-//   if (req.session.currentUser) { // <== if there's user in the session (user is logged in)
-//     next(); // ==> go to the next route ---
-//   } else {                          //    |
-//     res.redirect("/login");         //    |
-//   }                                 //    |
-// }); // ------------------------------------                                
-// //     | 
-//V
-
-
 //================= IF CURRENT USER IS LOGGED IN =================
 function isLoggedIn(req, res, next) {
   console.log(req.session)
-  if (req.session.currentUser) { // <== if there's user in the session (user is logged in)
-    next(); // ==> go to the next route ---
-  } else {                          //    |
-    res.redirect("/login");         //    |
+  if (req.session.currentUser) {
+    next();
+  } else {
+    res.redirect("/login");
   }
 }
 

@@ -7,49 +7,70 @@ const bcrypt = require("bcrypt");
 const bcryptSalt = 10;
 
 
-
-// router.get('/routine/details/:id/new', isLoggedIn, (req, res, next) => {
-//   res.render("routine/new");
-// })
-
 function isLoggedIn(req, res, next) {
   console.log(req.session)
-  if (req.session.currentUser) { // <== if there's user in the session (user is logged in)
-    next(); // ==> go to the next route ---
-  } else {                          //    |
-    res.redirect("/login");         //    |
+  if (req.session.currentUser) {
+    next();
+  } else {
+    res.redirect("/login");
   }
 }
 
 
-//! /routine/details/5ccc47b841dd15bf711f5b77/new
+
 //=====================ADD NEW EXERCISE===================
+
+//? THE ROUTE: /routine/details/5ccc47b841dd15bf711f5b77/new
+
 router.get('/routine/details/:id/new', isLoggedIn, (req, res, next) => {
-  res.render("exercise/new")
+  res.render("exercise/new", { currentUser: req.params })
 })
+
+
+
+
 
 //====================SHOW ALL EXERCISES FOR ROUTINE=======
-router.get('/routine/details/:id/new', isLoggedIn, (req, res, next) => {
-  Exercise.find()
-    .then(exercise => {
-      res.render("/routine/details/:id", { exercise })
-        .catch(err => {
-          next(err)
-        })
-    })
+//! taking you to /wer ... (need to figure out where to put the exercise data user inputs)
+
+router.get('/routine/details/:id/show', isLoggedIn, (req, res, next) => {
+  // res.json({ asba: 'asdnk' })
+  let routineId = req.params;
+  Routine.findById(req.params.id).then((routine) => {
+    Exercise.find({ routineId: routine })
+      .then(exercise => {
+        // res.json(exercise)
+        if (exercise.length === 0) {
+          res.render(`exercise/show`, { routineId })
+        } else {
+          res.render(`exercise/show`, { exercise })
+        }
+      })
+      .catch(err => {
+        next(err)
+      })
+  })
 })
 
 
-///! /routine/details/:id{{routine.id}}/new
+
+//==========Send form info to database==========
+///? THE ROUTE: /routine/details/:id{{routine.id}}/new
+
+
 router.post('/routine/details/:id/new', isLoggedIn, (req, res, next) => {
-  const { name, reps, sets, weight, routineId } = req.body;
-  const newExercise = new Exercise({ name, reps, sets, weight, routineId })
-  newExercise.save()
-    .then((newRoutine) => {
-      res.redirect(`/routine/details/${newRoutine._id}`)
-    }).catch(err => {
-      console.log(err)
-    })
+  // res.json(req.body)
+  Routine.findById(req.params.id).then(routine => {
+    const { name, reps, sets, weight } = req.body;
+    const newExercise = new Exercise({ routineId: routine, name, reps, sets, weight })
+    newExercise.save()
+      .then((newRoutine) => {
+        res.redirect(`/routine/details/${req.params.id}`)
+      }).catch(err => {
+        console.log(err)
+      })
+  })
+
 })
 
 

@@ -1,0 +1,39 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-3">
+      <h3>Exercise name</h3>
+    </div>
+    <div class="col-md-3">
+      <h3>Reps</h3>
+    </div>
+    <div class="col-md-3">
+      <h3>Sets</h3>
+    </div>
+    <div class="col-md-3">
+      <h3>Weight</h3>
+    </div>
+  </div>
+  <div class="row">
+    {{#each exercise}}
+    <div class="col-md-3">
+      {{this.name}}
+    </div>
+    <div class="col-md-3">
+      {{this.reps}}
+    </div>
+    <div class="col-md-3">
+      {{this.sets}}
+    </div>
+    <div class="col-md-3">
+      {{this.weight}}
+    </div>
+    {{/each}}
+  </div>
+</div>
+
+{{#if routineId}}
+<a href="/routine/details/{{routineId.id}}/new"> ADD EXERCISE </a>
+{{else}}
+<a href="/routine/details/{{exercise.0.routineId}}/new"> ADD EXERCISE </a>
+
+{{/if}}

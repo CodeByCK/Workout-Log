@@ -3,9 +3,9 @@
 <ul>
   {{#each routines}}
   <li>
-    {{this.name}}<a href="/routine/delete?id={{this._id}}" class="edit-button">DELETE</a>
+    <a href="/routine/details/{{this._id}}/show">{{this.name}}</a>
+    <a href="/routine/delete?id={{this._id}}" class="edit-button">DELETE</a>
     <a href="/routine/edit?id={{this._id}}" class="edit-button">EDIT</a>
-    <a href="/routine/details/{{this._id}}" class="edit-button">VIEW</a>
 
     <br>
     <i>{{this.description}}</i>
