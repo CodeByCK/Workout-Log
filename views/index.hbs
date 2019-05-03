@@ -1,6 +1,9 @@
 <h1>{{title}}</h1>
 <p>Welcome to {{title}}</p>
 
-
+{{#if user}}
+<a href="/auth/logout">Logout</a>
+{{else}}
 <h1><a href="/login"> LOG IN</a></h1>
 <h1><a href="/signup"> SIGN UP</a></h1>
+{{/if}}

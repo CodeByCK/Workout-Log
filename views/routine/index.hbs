@@ -1,0 +1,13 @@
+<h1>ALL YOUR ROUTINES</h1>
+
+<ul>
+  {{#each routines}}
+  <li>
+    {{this.name}}<a href="/routine/delete?id={{this._id}}" class="edit-button">DELETE</a>
+    <a href="/routine/edit?id={{this._id}}" class="edit-button">EDIT</a>
+    < <br>
+      <i>{{this.description}}</i>
+  </li>
+  {{/each}}
+</ul>
+<a href="/routine/new">ADD</a>

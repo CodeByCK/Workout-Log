@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const User = require("../models/user");
+const User = require("../models/User");
 
 //encrypt passwords
 const bcrypt = require("bcrypt");
@@ -93,7 +93,7 @@ router.post("/signup", (req, res, next) => {
         email
       })
         .then(() => {
-          res.redirect("/");
+          res.redirect("/dashboard");
         })
         .catch(error => {
           console.log(error);
