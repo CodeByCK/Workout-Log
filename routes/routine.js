@@ -18,25 +18,44 @@ function isLoggedIn(req, res, next) {
 
 //===============SHOW ALL  ROUTINES===================
 router.get('/routine', isLoggedIn, (req, res, next) => {
-  Routine.find()
+
+  Routine.find({ userId: req.session.currentUser })
     .then(routines => {
       res.render("routine/index", { routines });
+    }).catch(err => {
+      console.log(err)
     })
 });
 
 //===============ADD NEW ROUTINES=====================
 router.get('/routine/new', isLoggedIn, (req, res, next) => {
   res.render("routine/new");
-});
+})
 
 //==============ADD ROUTINE TO DATABASE===============
+router.get('/routine/details/:id', (req, res, next) => {
+  Routine.findById(req.params.id).then(routineDetail => {
+    // res.json(routineDetail)
+    res.render("routine/details", { routineDetail })
+      .catch(err => {
+        next(err)
+      })
+  })
+})
+
+
 router.post('/routine/new', isLoggedIn, (req, res, next) => {
   const { name, description } = req.body;
-  const newRoutine = new Routine({ name, description })
+  // res.json(req.session.currentUser)
+  const newRoutine = new Routine({ userId: req.session.currentUser, name, description })
   newRoutine.save()
     .then((newRoutine) => {
-      res.redirect("/routine")
+      res.redirect(`/routine/details/${newRoutine._id}`)
+    }).catch(err => {
+      console.log(err)
     })
+
+
 })
 
 //===============EDIT ROUTINE========================
@@ -65,6 +84,8 @@ router.get('/routine/delete', isLoggedIn, (req, res, next) => {
   Routine.findByIdAndDelete(req.query.id)
     .then((routines) => {
       res.redirect("/routine/")
+    }).catch(err => {
+      console.log(err)
     })
 })
 

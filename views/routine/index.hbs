@@ -5,8 +5,10 @@
   <li>
     {{this.name}}<a href="/routine/delete?id={{this._id}}" class="edit-button">DELETE</a>
     <a href="/routine/edit?id={{this._id}}" class="edit-button">EDIT</a>
-    < <br>
-      <i>{{this.description}}</i>
+    <a href="/routine/details/{{this._id}}" class="edit-button">VIEW</a>
+
+    <br>
+    <i>{{this.description}}</i>
   </li>
   {{/each}}
 </ul>

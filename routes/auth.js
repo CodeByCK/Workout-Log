@@ -84,13 +84,13 @@ router.post("/signup", (req, res, next) => {
 
       const salt = bcrypt.genSaltSync(bcryptSalt);
       const hashPass = bcrypt.hashSync(password, salt);
-
       User.create({
         username,
         password: hashPass,
         firstName,
         lastName,
-        email
+        email,
+        // allRoutines
       })
         .then(() => {
           res.redirect("/dashboard");

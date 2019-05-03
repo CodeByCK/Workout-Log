@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const RoutineSchema = new Schema({
   userId: { type: Schema.Types.ObjectId, ref: 'User' },
-  exerciseList: [{ type: Schema.Types.ObjectId, ref: 'Exercise' }],
+  // exerciseList: [{ type: Schema.Types.ObjectId, ref: 'Exercise' }],
   name: { type: String, required: true },
   description: { type: String }
 }, {

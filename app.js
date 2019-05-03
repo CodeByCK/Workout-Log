@@ -71,6 +71,9 @@ app.use('/', authRoutes);
 const routineRoutes = require('./routes/routine');
 app.use('/', routineRoutes);
 
+const exerciseRoutes = require('./routes/exercise');
+app.use('/', exerciseRoutes);
+
 
 
 module.exports = app;
