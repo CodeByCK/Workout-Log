@@ -22,7 +22,7 @@ function isLoggedIn(req, res, next) {
 
 //? THE ROUTE: /routine/details/5ccc47b841dd15bf711f5b77/new
 
-router.get('/routine/details/:id/new', isLoggedIn, (req, res, next) => {
+router.get('/routine/:id/new', isLoggedIn, (req, res, next) => {
   res.render("exercise/new", { currentUser: req.params })
 })
 
@@ -33,7 +33,7 @@ router.get('/routine/details/:id/new', isLoggedIn, (req, res, next) => {
 //====================SHOW ALL EXERCISES FOR ROUTINE=======
 //! taking you to /wer ... (need to figure out where to put the exercise data user inputs)
 
-router.get('/routine/details/:id/show', isLoggedIn, (req, res, next) => {
+router.get('/routine/:id/show', isLoggedIn, (req, res, next) => {
   // res.json({ asba: 'asdnk' })
   let routineId = req.params;
   Routine.findById(req.params.id).then((routine) => {
@@ -58,14 +58,14 @@ router.get('/routine/details/:id/show', isLoggedIn, (req, res, next) => {
 ///? THE ROUTE: /routine/details/:id{{routine.id}}/new
 
 
-router.post('/routine/details/:id/new', isLoggedIn, (req, res, next) => {
+router.post('/routine/:id/new', isLoggedIn, (req, res, next) => {
   // res.json(req.body)
   Routine.findById(req.params.id).then(routine => {
     const { name, reps, sets, weight } = req.body;
     const newExercise = new Exercise({ routineId: routine, name, reps, sets, weight })
     newExercise.save()
       .then((newRoutine) => {
-        res.redirect(`/routine/details/${req.params.id}`)
+        res.redirect(`/routine/${req.params.id}/show`)
       }).catch(err => {
         console.log(err)
       })

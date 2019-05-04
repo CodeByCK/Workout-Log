@@ -31,9 +31,11 @@
   </div>
 </div>
 
+
+
 {{#if routineId}}
-<a href="/routine/details/{{routineId.id}}/new"> ADD EXERCISE </a>
+<a href="/routine/{{routineId.id}}/new"> ADD EXERCISE </a>
 {{else}}
-<a href="/routine/details/{{exercise.0.routineId}}/new"> ADD EXERCISE </a>
+<a href="/routine/{{exercise.0.routineId}}/new"> ADD EXERCISE </a>
 
 {{/if}}

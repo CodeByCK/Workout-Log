@@ -39,16 +39,16 @@ router.get('/routine/new', isLoggedIn, (req, res, next) => {
 
 
 //==============ADD ROUTINE TO DATABASE===============
-router.get('/routine/details/:id', (req, res, next) => {
-  Routine.findById(req.params.id).then(routineDetail => {
-    // res.json(routineDetail)
+// router.get('/routine/details/:id', (req, res, next) => {
+//   Routine.findById(req.params.id).then(routineDetail => {
+//     // res.json(routineDetail)
 
-    res.render("routine/details", { routineDetail })
-      .catch(err => {
-        next(err)
-      })
-  })
-})
+//     res.render("routine/details", { routineDetail })
+//       .catch(err => {
+//         next(err)
+//       })
+//   })
+// })
 
 
 router.post('/routine/new', isLoggedIn, (req, res, next) => {
@@ -57,7 +57,7 @@ router.post('/routine/new', isLoggedIn, (req, res, next) => {
   const newRoutine = new Routine({ userId: req.session.currentUser, name, description })
   newRoutine.save()
     .then((newRoutine) => {
-      res.redirect(`/routine/details/${newRoutine._id}/show`)
+      res.redirect(`/routine/`)
     }).catch(err => {
       console.log(err)
     })

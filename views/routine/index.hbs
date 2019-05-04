@@ -3,7 +3,7 @@
 <ul>
   {{#each routines}}
   <li>
-    <a href="/routine/details/{{this._id}}/show">{{this.name}}</a>
+    <a href="/routine/{{this._id}}/show">{{this.name}}</a>
     <a href="/routine/delete?id={{this._id}}" class="edit-button">DELETE</a>
     <a href="/routine/edit?id={{this._id}}" class="edit-button">EDIT</a>
 
@@ -12,4 +12,10 @@
   </li>
   {{/each}}
 </ul>
-<a href="/routine/new">ADD</a>
+{{!-- <a href="/routine/new">ADD</a> --}}
+
+<form action="/routine/new" method="POST">
+  <input type="text" name="name" placeholder="Name"><br>
+  <input type="text" name="description" placeholder="Description"><br>
+  <button type="submit">SUBMIT</button>
+</form>
