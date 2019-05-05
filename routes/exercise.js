@@ -30,6 +30,7 @@ router.get('/routine/:id/new', isLoggedIn, (req, res, next) => {
 
 
 
+
 //====================SHOW ALL EXERCISES FOR ROUTINE=======
 //! taking you to /wer ... (need to figure out where to put the exercise data user inputs)
 
