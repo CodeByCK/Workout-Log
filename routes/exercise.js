@@ -17,35 +17,13 @@ function isLoggedIn(req, res, next) {
 }
 
 
-
-//=====================ADD NEW EXERCISE===================
-
-//? THE ROUTE: /routine/details/5ccc47b841dd15bf711f5b77/new
-
-router.get('/routine/:id/new', isLoggedIn, (req, res, next) => {
-  res.render("exercise/new", { currentUser: req.params })
-})
-
-
-
-
-
-
 //====================SHOW ALL EXERCISES FOR ROUTINE=======
-//! taking you to /wer ... (need to figure out where to put the exercise data user inputs)
 
-router.get('/routine/:id/show', isLoggedIn, (req, res, next) => {
-  // res.json({ asba: 'asdnk' })
-  let routineId = req.params;
+router.get('/routine/:id/', isLoggedIn, (req, res, next) => {
   Routine.findById(req.params.id).then((routine) => {
     Exercise.find({ routineId: routine })
       .then(exercise => {
-        // res.json(exercise)
-        if (exercise.length === 0) {
-          res.render(`exercise/show`, { routineId })
-        } else {
-          res.render(`exercise/show`, { exercise })
-        }
+        res.render(`exercise/show`, { exercise })
       })
       .catch(err => {
         next(err)
@@ -59,20 +37,47 @@ router.get('/routine/:id/show', isLoggedIn, (req, res, next) => {
 ///? THE ROUTE: /routine/details/:id{{routine.id}}/new
 
 
-router.post('/routine/:id/new', isLoggedIn, (req, res, next) => {
-  // res.json(req.body)
+router.post('/routine/:id/', isLoggedIn, (req, res, next) => {
   Routine.findById(req.params.id).then(routine => {
     const { name, reps, sets, weight } = req.body;
     const newExercise = new Exercise({ routineId: routine, name, reps, sets, weight })
     newExercise.save()
       .then((newRoutine) => {
-        res.redirect(`/routine/${req.params.id}/show`)
+        res.redirect(`/routine/${req.params.id}/`)
       }).catch(err => {
         console.log(err)
       })
   })
-
 })
+
+
+//================DELETE EXERCISE=============
+
+router.post('/deleteExercise', (req, res, next) => {
+  Exercise.findByIdAndDelete(req.body.exerciseId)
+    .then(exercise => {
+      res.redirect("./")
+    })
+    .catch(err => {
+      next(err)
+    })
+})
+
+
+//=================EDIT EXERCISE===============
+
+router.post('/editExercise', (req, res, next) => {
+  let { name, reps, sets, weight } = req.body
+  Exercise.findByIdAndUpdate(req.body.exerciseId, { name, reps, sets, weight })
+    .then(exercise => {
+      res.redirect("./")
+    })
+    .catch(err => {
+      next(err)
+    })
+})
+
+
 
 
 module.exports = router;

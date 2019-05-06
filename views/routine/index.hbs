@@ -3,7 +3,7 @@
 <ul>
   {{#each routines}}
   <li>
-    <a href="/routine/{{this._id}}/show">{{this.name}}</a>
+    <a href="/routine/{{this._id}}/">{{this.name}}</a>
     <a href="/routine/delete?id={{this._id}}" class="edit-button">DELETE</a>
     <a href="/routine/edit?id={{this._id}}" class="edit-button">EDIT</a>
 
@@ -12,13 +12,13 @@
   </li>
   {{/each}}
 </ul>
-{{!-- <a href="/routine/new">ADD</a> --}}
+
 
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newRoutine">
   Add
 </button>
 
-<!-- Modal -->
+<!-- NEW ROUTINE MODAL-->
 <div class="modal fade" id="newRoutine" tabindex="-1" role="dialog" aria-labelledby="newRoutineLabel"
   aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -33,7 +33,6 @@
         <form action="/routine/new" method="POST" id="addRoutine">
           <input type="text" class="form-control" name="name" placeholder="Name"><br>
           <input type="text" class="form-control" name="description" placeholder="Description"><br>
-          {{!-- <button type="submit">SUBMIT</button> --}}
         </form>
       </div>
       <div class="modal-footer">
@@ -43,11 +42,3 @@
     </div>
   </div>
 </div>
-
-
-
-{{!-- <form action="/routine/new" method="POST">
-  <input type="text" name="name" placeholder="Name"><br>
-  <input type="text" name="description" placeholder="Description"><br>
-  <button type="submit">SUBMIT</button>
-</form> --}}

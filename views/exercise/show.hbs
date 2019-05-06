@@ -3,10 +3,10 @@
     <div class="col-md-3">
       <h3>Exercise name</h3>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-2">
       <h3>Reps</h3>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-2">
       <h3>Sets</h3>
     </div>
     <div class="col-md-3">
@@ -18,21 +18,131 @@
     <div class="col-md-3">
       {{this.name}}
     </div>
-    <div class="col-md-3">
+    <div class="col-md-2">
       {{this.reps}}
     </div>
-    <div class="col-md-3">
+    <div class="col-md-2">
       {{this.sets}}
     </div>
     <div class="col-md-3">
       {{this.weight}}
     </div>
+    <div class="col-md-2">
+      <button id="delete-btn" class="btn btn-primary" exerciseid="{{this._id}}">Delete</button>
+
+      <button type="button" id="edit-btn" exerciseid="{{this._id}}" class="btn btn-primary" data-toggle="modal"
+        data-target="#editExercise" data='{ "name" : "{{this.name}}" , "reps" : "{{this.reps}}" , "sets"
+        : "{{this.sets}}" , "weight" : "{{this.weight}}" }'>
+        Edit
+      </button>
+    </div>
     {{/each}}
   </div>
 </div>
 
-{{#if routineId}}
-<a href="/routine/{{routineId.id}}/new"> ADD EXERCISE </a>
-{{else}}
-<a href="/routine/{{exercise.0.routineId}}/new"> ADD EXERCISE </a>
-{{/if}}
+
+
+<!-- ADD EXERCISE MODAL-->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addExercise1">
+  Add Exercise
+</button>
+<div class="modal fade" id="addExercise1" tabindex="-1" role="dialog" aria-labelledby="addExercise1Label"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addExercise1Label">Add Exercise</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="./" method="POST" id="exercise1">
+          <input type="text" class="form-control" name="name" placeholder="ex. Bench Press"><br>
+          <input type="text" class="form-control" name="reps" placeholder="ex. 10"><br>
+          <input type="text" class="form-control" name="sets" placeholder="ex. 5"><br>
+          <input type="text" class="form-control" name="weight" placeholder="ex. 205"><br>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary" form="exercise1">Save Exercise</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="editModal"></div>
+
+
+
+
+<script>
+
+  //======delete======
+  let deleteBtns = document.querySelectorAll("#delete-btn");
+  for (let i = 0; i < deleteBtns.length; i++) {
+    deleteBtns[i].addEventListener("click", (e) => {
+      let exerciseId = e.target.attributes.exerciseid.value;
+      axios.post('/deleteExercise', { exerciseId }).then(result => {
+        location.reload();
+      })
+    })
+  }
+
+
+
+  //=======edit ======
+  let editBtns = document.querySelectorAll("#edit-btn");
+  for (let i = 0; i < deleteBtns.length; i++) {
+    editBtns[i].addEventListener("click", (e) => {
+      let exerciseId = e.target.attributes.exerciseid.value;
+
+      let data = JSON.parse(e.target.attributes.data.value);
+      console.log(data)
+
+      document.querySelector("#editModal").innerHTML = `
+<div class="modal fade" id="editExercise" tabindex="-1" role="dialog" aria-labelledby="editExerciseLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editExerciseLabel">Add Exercise</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="/editExercise" method="POST" id="edit">
+          <input type="text" class="form-control" name="name" value="${data.name}"><br>
+          <input type="text" class="form-control" name="reps" value="${data.reps}"><br>
+          <input type="text" class="form-control" name="sets" value="${data.sets}"><br>
+          <input type="text" class="form-control" name="weight" value="${data.weight}"><br>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary" id="submitEdit" exerciseId=${exerciseId}>Save Changes</button>
+      </div>
+    </div>
+  </div>
+</div>`
+
+      document.querySelector('#submitEdit').addEventListener("click", (e) => {
+        let exerciseId = e.target.attributes.exerciseid.value
+        let name = document.querySelector('#edit > input:nth-child(1)').value
+        let reps = document.querySelector('#edit > input:nth-child(3)').value
+        let sets = document.querySelector('#edit > input:nth-child(5)').value
+        let weight = document.querySelector('#edit > input:nth-child(7)').value
+
+        axios.post('/editExercise', { exerciseId, name, reps, sets, weight }).then(() => {
+          location.reload()
+        });
+      })
+    })
+  }
+
+</script>
+
+
+<!-- EDIT MODAL -->
