@@ -52,9 +52,9 @@ router.get('/routine/new', isLoggedIn, (req, res, next) => {
 
 
 router.post('/routine/new', isLoggedIn, (req, res, next) => {
-  const { name, description } = req.body;
+  const { name, description, date } = req.body;
   // res.json(req.session.currentUser)
-  const newRoutine = new Routine({ userId: req.session.currentUser, name, description })
+  const newRoutine = new Routine({ userId: req.session.currentUser, name, description, date })
   newRoutine.save()
     .then((newRoutine) => {
       res.redirect(`/routine/`)

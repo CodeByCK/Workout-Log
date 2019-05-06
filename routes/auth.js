@@ -58,14 +58,12 @@ router.post("/login", (req, res, next) => {
 router.post("/signup", (req, res, next) => {
   const username = req.body.username;
   const password = req.body.password;
-  const firstName = req.body.firstName;
-  const lastName = req.body.lastName;
-  const email = req.body.email;
+  const displayName = req.body.displayName;
   const salt = bcrypt.genSaltSync(bcryptSalt);
   const hashPass = bcrypt.hashSync(password, salt);
 
   //Field must be filled or Error message pops up
-  if (username === "" || password === "" || firstName === "" || lastName === "" || email === "") {
+  if (username === "" || password === "" || displayName === "") {
     res.render("auth/signup", {
       errorMessage: "Must fill all fields"
     });
@@ -87,9 +85,7 @@ router.post("/signup", (req, res, next) => {
       User.create({
         username,
         password: hashPass,
-        firstName,
-        lastName,
-        email
+        displayName
       })
         .then(() => {
           res.redirect("/dashboard");
