@@ -17,13 +17,15 @@ function isLoggedIn(req, res, next) {
 }
 
 
-//====================SHOW ALL EXERCISES FOR ROUTINE=======
+
+//====================SHOW ALL EXERCISES FOR ROUTINE==================
 
 router.get('/routine/:id/', isLoggedIn, (req, res, next) => {
   Routine.findById(req.params.id).then((routine) => {
+    // res.render('exercise/show', { routine })
     Exercise.find({ routineId: routine })
       .then(exercise => {
-        res.render(`exercise/show`, { exercise })
+        res.render(`exercise/show`, { exercise, routine })
       })
       .catch(err => {
         next(err)
@@ -53,7 +55,7 @@ router.post('/routine/:id/', isLoggedIn, (req, res, next) => {
 
 //================DELETE EXERCISE=============
 
-router.post('/deleteExercise', (req, res, next) => {
+router.post('/deleteExercise', isLoggedIn, (req, res, next) => {
   Exercise.findByIdAndDelete(req.body.exerciseId)
     .then(exercise => {
       res.redirect("./")
@@ -66,7 +68,7 @@ router.post('/deleteExercise', (req, res, next) => {
 
 //=================EDIT EXERCISE===============
 
-router.post('/editExercise', (req, res, next) => {
+router.post('/editExercise', isLoggedIn, (req, res, next) => {
   let { name, reps, sets, weight } = req.body
   Exercise.findByIdAndUpdate(req.body.exerciseId, { name, reps, sets, weight })
     .then(exercise => {

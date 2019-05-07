@@ -12,6 +12,7 @@ const bcrypt = require("bcrypt");
 const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
 
+
 mongoose
   .connect('mongodb://localhost/workout-log', { useNewUrlParser: true })
   .then(x => {
@@ -23,6 +24,12 @@ mongoose
 
 const app_name = require('./package.json').name;
 const debug = require('debug')(`${app_name}:${path.basename(__filename).split('.')[0]}`);
+
+//Helper
+
+
+hbs.registerHelper('moment', require('helper-moment'));
+
 
 const app = express();
 

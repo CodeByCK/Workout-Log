@@ -6,12 +6,29 @@
                     <h5 class="card-title text-center">Create an account</h5>
                     <form class="form-signin" action="/signup" method="POST">
                         <div class="form-label-group">
-                            <input type="text" id="inputEmail" name="displayName" class="form-control mt-2"
-                                placeholder="Display Name" required autofocus>
+                            <input type="text" name="displayName" class="form-control mt-2" placeholder="Display Name"
+                                required autofocus>
                         </div>
                         <div class="form-label-group">
-                            <input type="text" id="inputEmail" name="username" class="form-control mt-2"
-                                placeholder="Username" required autofocus>
+                            <input type="text" name="username" class="form-control mt-2" placeholder="Username" required
+                                autofocus>
+                        </div>
+                        <div class="form-label-group" style="display:none">
+                            <input type="text" name="location" class="form-control mt-2" placeholder="location"
+                                autofocus>
+                        </div>
+                        <div class="form-label-group" style="display:none">
+                            <input type="text" name="training" class="form-control mt-2" placeholder="training"
+                                autofocus>
+                        </div>
+                        <div class="form-label-group" style="display:none">
+                            <input type="text" name="goal" class="form-control mt-2" placeholder="goal">
+                        </div>
+                        <div class="form-label-group" style="display:none">
+                            <input type="text" name="bio" class="form-control mt-2" placeholder="bio">
+                        </div>
+                        <div class="form-label-group" style="display:none">
+                            <input type="text" name="img" class="form-control mt-2" placeholder="img">
                         </div>
                         <div class="form-label-group">
                             <input type="password" id="inputPassword" class="form-control mt-2" name="password"

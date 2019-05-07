@@ -16,6 +16,7 @@
     "express": "^4.16.3",
     "express-session": "^1.16.1",
     "hbs": "^4.0.1",
+    "helper-moment": "^0.2.0",
     "moment": "^2.24.0",
     "mongoose": "^5.2.10",
     "morgan": "^1.9.0",

@@ -17,6 +17,17 @@ router.get('/login', (req, res, next) => {
   res.render('auth/login')
 })
 
+// router.get('/routine', isLoggedIn, (req, res, next) => {
+//   const user = req.session.currentUser
+
+//   Routine.find({ userId: user })
+//     .then(routines => {
+//       res.render("routine/index", { routines, user });
+//     }).catch(err => {
+//       next(err)
+//     })
+// });
+
 
 // ========================LOGIN==================================
 router.post("/login", (req, res, next) => {
@@ -59,6 +70,12 @@ router.post("/signup", (req, res, next) => {
   const username = req.body.username;
   const password = req.body.password;
   const displayName = req.body.displayName;
+  const img = req.body.img;
+  const training = req.body.training;
+  const location = req.body.location;
+  const goal = req.body.goal;
+  const bio = req.body.goal;
+
   const salt = bcrypt.genSaltSync(bcryptSalt);
   const hashPass = bcrypt.hashSync(password, salt);
 
@@ -85,7 +102,12 @@ router.post("/signup", (req, res, next) => {
       User.create({
         username,
         password: hashPass,
-        displayName
+        displayName,
+        img,
+        training,
+        location,
+        goal,
+        bio
       })
         .then(() => {
           res.redirect("/dashboard");

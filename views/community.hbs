@@ -1,0 +1,40 @@
+<!-- Add image and link to each profile -->
+
+<div class="container-fluid mt-3">
+  <div class="row">
+    <div class="col-md-2">
+      <ul class="nav flex-column nav-pills">
+        <li class="nav-item">
+          <a class="nav-link" href="/dashboard">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/routine">Routines</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="/community">Community</a>
+        </li>
+      </ul>
+    </div>
+    <div class="col-md-10">
+      <h1 class="text-center"> Community</h1>
+      <div class="container">
+        <div class="row">
+          {{#each allUsers}}
+          <div class="col-xs-2">
+            <div class="user">
+              <img class="profile-img"
+                src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120"
+                alt="">
+              <h3 class="lead" align='center'>
+                {{this.username}}
+                {{this.location}}
+                {{this.goal}}
+              </h3>
+            </div>
+          </div>
+          {{/each}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

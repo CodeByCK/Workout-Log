@@ -1,52 +1,88 @@
-<div class="container-fluid">
+<div class="container-fluid mt-3">
   <div class="row">
-    <div class="col-md-3">
-      <h3>Exercise name</h3>
-    </div>
     <div class="col-md-2">
-      <h3>Reps</h3>
+      <ul class="nav flex-column nav-pills">
+        <li class="nav-item">
+          <a class="nav-link active" href="/dashboard">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/routine">Routines</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" href="#">Something Else</a>
+        </li>
+      </ul>
     </div>
-    <div class="col-md-2">
-      <h3>Sets</h3>
-    </div>
-    <div class="col-md-3">
-      <h3>Weight</h3>
-    </div>
-  </div>
-  <div class="row">
-    {{#each exercise}}
-    <div class="col-md-3">
-      {{this.name}}
-    </div>
-    <div class="col-md-2">
-      {{this.reps}}
-    </div>
-    <div class="col-md-2">
-      {{this.sets}}
-    </div>
-    <div class="col-md-3">
-      {{this.weight}}
-    </div>
-    <div class="col-md-2">
-      <button id="delete-btn" class="btn btn-primary" exerciseid="{{this._id}}"><i
-          class="fas fa-trash-alt"></i></button>
+    <div class="col-md-10">
+      <a href="../">BACK</a><br>
 
-      <button type="button" id="edit-btn" exerciseid="{{this._id}}" class="btn btn-primary" data-toggle="modal"
-        data-target="#editExercise" data='{ "name" : "{{this.name}}" , "reps" : "{{this.reps}}" , "sets"
-        : "{{this.sets}}" , "weight" : "{{this.weight}}" }'>
-        <i class="fas fa-edit"></i>
+      <h1 class="text-center">{{routine.name}}</h1>
+      <button type="button" class="btn btn-primary text-center" data-toggle="modal" data-target="#editRoutine">
+        Edit Name
       </button>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>
+              Exercise
+            </th>
+            <th>
+              Sets
+            </th>
+            <th>
+              Reps
+            </th>
+            <th>
+              Weight
+            </th>
+            <th>
+              Edit / Delete
+            </th>
+          </tr>
+        </thead>
+        {{#each exercise}}
+        <tbody>
+          <tr>
+            <td>
+              {{this.name}}
+            </td>
+            <td>
+              {{this.sets}}
+            </td>
+            <td>
+              {{this.reps}}
+            </td>
+            <td>
+              {{this.weight}}
+            </td>
+            <td>
+              <button type="button" id="edit-btn" exerciseid="{{this._id}}" class="btn btn-primary" data-toggle="modal"
+                data-target="#editExercise" data='{ "name" : "{{this.name}}" , "reps" : "{{this.reps}}" , "sets"
+                : "{{this.sets}}" , "weight" : "{{this.weight}}" }'><i class="fas fa-edit" id="edit-btn"
+                  exerciseid="{{this._id}}" data-toggle="modal" data-target="#editExercise" data='{ "name" : "{{this.name}}" , "reps" : "{{this.reps}}" , "sets"
+                : "{{this.sets}}" , "weight" : "{{this.weight}}" }'></i>
+              </button>
+              <button id="delete-btn" class="btn btn-primary" exerciseid="{{this._id}}"><i class="fas fa-trash-alt"
+                  id="delete-btn" exerciseid="{{this._id}}" data-toggle="modal" data-target="#editExercise" data='{ "name" : "{{this.name}}" , "reps" : "{{this.reps}}" , "sets"
+                : "{{this.sets}}" , "weight" : "{{this.weight}}" }'></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+        {{/each}}
+      </table>
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addExercise1">
+        <i class="fas fa-plus"></i>
+      </button>
+      <div>
+      </div>
     </div>
-    {{/each}}
   </div>
 </div>
 
 
-
 <!-- ADD EXERCISE MODAL-->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addExercise1">
-  Add Exercise
-</button>
+
 <div class="modal fade" id="addExercise1" tabindex="-1" role="dialog" aria-labelledby="addExercise1Label"
   aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -73,9 +109,38 @@
   </div>
 </div>
 
+
+<!-- ADD EXERCISE MODAL-->
+<!-- Button trigger modal -->
+
+<div class="modal fade" id="editRoutine" tabindex="-1" role="dialog" aria-labelledby="editRoutineLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editRoutineLabel">Edit Routine Name</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="/routine/edit?id={{routine._id}}" method="POST" id="editRoutineName">
+          <input type="text" class="form-control" name="name" value="{{routine.name}}"><br>
+          <input type="text" class="form-control" name="description" value="{{routine.description}}"><br>
+          {{!-- <button type="submit">SUBMIT</button> --}}
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary" form="editRoutineName">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
 <div id="editModal"></div>
-
-
 
 
 <script src="/javascripts/exerciseButtons.js">

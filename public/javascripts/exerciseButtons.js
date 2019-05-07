@@ -15,7 +15,7 @@ for (let i = 0; i < deleteBtns.length; i++) {
 
 //=======edit ======
 let editBtns = document.querySelectorAll("#edit-btn");
-for (let i = 0; i < deleteBtns.length; i++) {
+for (let i = 0; i < editBtns.length; i++) {
   editBtns[i].addEventListener("click", (e) => {
     let exerciseId = e.target.attributes.exerciseid.value;
 

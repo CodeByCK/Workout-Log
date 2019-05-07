@@ -4,6 +4,7 @@ const User = require("../models/User");
 const Routine = require("../models/Routine");
 const bcrypt = require("bcrypt");
 const bcryptSalt = 10;
+const moment = require("moment");
 
 
 function isLoggedIn(req, res, next) {
@@ -18,12 +19,13 @@ function isLoggedIn(req, res, next) {
 
 //===============SHOW ALL  ROUTINES===================
 router.get('/routine', isLoggedIn, (req, res, next) => {
+  const user = req.session.currentUser
 
-  Routine.find({ userId: req.session.currentUser })
+  Routine.find({ userId: user })
     .then(routines => {
-      res.render("routine/index", { routines });
+      res.render("routine/index", { routines, user });
     }).catch(err => {
-      console.log(err)
+      next(err)
     })
 });
 
@@ -31,58 +33,35 @@ router.get('/routine', isLoggedIn, (req, res, next) => {
 
 
 //===============ADD NEW ROUTINES=====================
-router.get('/routine/new', isLoggedIn, (req, res, next) => {
-  res.render("routine/new");
-})
-
-
-
-
-//==============ADD ROUTINE TO DATABASE===============
-// router.get('/routine/details/:id', (req, res, next) => {
-//   Routine.findById(req.params.id).then(routineDetail => {
-//     // res.json(routineDetail)
-
-//     res.render("routine/details", { routineDetail })
-//       .catch(err => {
-//         next(err)
-//       })
-//   })
-// })
 
 
 router.post('/routine/new', isLoggedIn, (req, res, next) => {
   const { name, description, date } = req.body;
+  const user = req.session.currentUser
   // res.json(req.session.currentUser)
-  const newRoutine = new Routine({ userId: req.session.currentUser, name, description, date })
+  const newRoutine = new Routine({ userId: user, name, description, date })
   newRoutine.save()
     .then((newRoutine) => {
       res.redirect(`/routine/`)
     }).catch(err => {
-      console.log(err)
+      next(err)
     })
-
-
 })
 
+
+
 //===============EDIT ROUTINE========================
-router.get('/routine/edit', isLoggedIn, (req, res, next) => {
-  Routine.findById(req.query.id)
-    .then((routine) => {
-      res.render("routine/edit", { routine });
-    })
-    .catch((error) => {
-      console.log(error);
-    })
-});
 
 
 router.post('/routine/edit', isLoggedIn, (req, res, next) => {
   Routine.findByIdAndUpdate(req.query.id, req.body)
     .then((routine) => {
-      res.redirect("/routine")
-    }).catch(err => console.error(err))
+      res.redirect(req.get('referer'));
+    })
+    .catch(err =>
+      next(err))
 })
+
 
 
 //===============DELETE ROUTINE =====================
@@ -91,12 +70,10 @@ router.get('/routine/delete', isLoggedIn, (req, res, next) => {
   Routine.findByIdAndDelete(req.query.id)
     .then((routines) => {
       res.redirect("/routine/")
-    }).catch(err => {
-      console.log(err)
+    }).catch(error => {
+      next(error);
     })
 })
-
-
 
 
 

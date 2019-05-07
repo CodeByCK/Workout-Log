@@ -1,0 +1,27 @@
+<h1>Profile</h1>
+
+Display name: {{info.displayName}}<br>
+username: {{info.username}}<br>
+location: {{info.location}}<br>
+training: {{info.training}}<br>
+goal: {{info.goal}}<br>
+bio: {{info.bio}}<br>info
+img: {{info.img}}<br>
+
+
+
+
+
+
+
+
+
+<form action="/profile/edit/" method="POST" id="editProfile">
+  <input type="text" class="form-control" name="displayName" value="{{user.displayName}}"><br>
+  <input type="text" class="form-control" name="username" value="{{user.username}}"><br>
+  <input type="text" class="form-control" name="location" value="{{user.location}}"><br>
+  <input type="text" class="form-control" name="training" value="{{user.training}}"><br>
+  <input type="text" class="form-control" name="goal" value="{{user.goal}}"><br>
+  <input type="text" class="form-control" name="bio" value="{{user.bio}}"><br>
+  <button type="submit" form="editProfile"> Save Changes</button>
+</form>
