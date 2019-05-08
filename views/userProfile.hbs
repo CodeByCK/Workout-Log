@@ -1,4 +1,4 @@
-<div class="container-fluid mt-3">
+{{!-- <div class="container-fluid mt-3">
   <div class="row">
     <div class="col-md-2">
       <ul class="nav flex-column nav-pills">
@@ -6,14 +6,23 @@
           <a class="nav-link" href="/dashboard">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" href="/routine">Routines</a>
+          <a class="nav-link" href="/routine">Routines</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/community">Community</a>
+          <a class="nav-link active" href="/community">Community</a>
         </li>
       </ul>
     </div>
+
     <div class="col-md-10">
+      {{!-- BIO: {{user.bio}}
+      LOCATION: {{user.location}}
+      {{#if user.img}}
+      <img src="{{this.img}}">
+      {{else}}
+      <img src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120">
+      {{/if}}
+
       <h1 class="text-center">{{user.displayName}}'s Profile</h1>
       <table class="table table-bordered">
         <thead>
@@ -27,16 +36,13 @@
             <th>
               Date Created
             </th>
-            <th class="text-center">
-              Delete
-            </th>
           </tr>
         </thead>
         {{#each routines}}
         <tbody>
           <tr>
             <td>
-              <a href="/routine/{{this._id}}/">{{this.name}}</a>
+              <a href="/routine/{{this._id}}/">{{this.name}} Change this link!</a>
             </td>
             <td>
               {{this.description}}
@@ -44,18 +50,15 @@
             <td>
               {{moment date format="MMMM Do YYYY, h:mm:ss a"}}
             </td>
-            <td class="text-center">
-              <a href="/routine/delete?id={{this._id}}" class="fas fa-trash-alt btn btn-primary"></a>
-            </td>
           </tr>
         </tbody>
         {{/each}}
-      </table>
-      <div>
-      </div>
+      </table> 
+
+      <h1>Hello</h1>
     </div>
-  </div>
-</div>
+  </div> --}}
+
 
 
 
@@ -66,3 +69,134 @@
 name: {{this.name}}
 description: {{this.description}}
 {{/each}} --}}
+
+
+
+
+
+
+<div class="container-fluid mt-3">
+  <div class="row">
+    <div class="col-md-2">
+      <ul class="nav flex-column nav-pills">
+        <li class="nav-item">
+          <a class="nav-link" href="/dashboard">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/routine">Routines</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="/community">Community</a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="col-md-10">
+      <a href="/community">BACK</a>
+      <div class="container">
+        <div class="row profile">
+          <div class="col-md-3">
+            <div class="profile-sidebar">
+              <!-- SIDEBAR USERPIC -->
+              <div class="profile-userpic text-center">
+                {{#if user.img}}
+                <img src="{{user.img}}" class="img-responsive" alt="">
+                {{else}}
+                <img
+                  src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120"
+                  class="img-responsive" alt="">
+                {{/if}}
+              </div>
+              <!-- END SIDEBAR USERPIC -->
+              <!-- SIDEBAR USER TITLE -->
+              <div class="profile-usertitle">
+                <div class="profile-usertitle-name">
+                  {{user.displayName}}
+                </div>
+                <div class="profile-usermenu text-left">
+                  <i class="fas fa-map-marker-alt"></i> Location: {{user.location}}
+                </div>
+                <div class="profile-usermenu text-left">
+                  <i class="fas fa-bullseye"></i> Fitness Goal: {{user.goal}}
+                </div>
+                <div class="profile-usermenu text-left">
+                  <i class="fas fa-running"></i> Training: {{user.training}}
+                </div>
+                <div class="profile-usermenu text-left">
+                  <i class="fas fa-user"></i> About Me:<br><br>{{user.bio}}
+                </div>
+              </div>
+              <!-- END SIDEBAR USER TITLE -->
+
+              <!-- SIDEBAR MENU -->
+              {{!-- <div class="profile-usermenu">
+                <ul class="nav">
+                  <li class="active">
+                    <a href="#">
+                      <i class="glyphicon glyphicon-home"></i>
+                      Overview </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <i class="glyphicon glyphicon-user"></i>
+                      Account Settings </a>
+                  </li>
+                  <li>
+                    <a href="#" target="_blank">
+                      <i class="glyphicon glyphicon-ok"></i>
+                      Tasks </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <i class="glyphicon glyphicon-flag"></i>
+                      Help </a>
+                  </li>
+                </ul>
+              </div> --}}
+              <!-- END MENU -->
+            </div>
+          </div>
+          <div class="col-md-9">
+            <div class="profile-content">
+              <h3 class="text-center">{{user.displayName}}'s Activity</h3>
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>
+                      Routine Name
+                    </th>
+                    <th>
+                      Description
+                    </th>
+                    <th>
+                      Date Created
+                    </th>
+                  </tr>
+                </thead>
+                {{#each routines}}
+                <tbody>
+                  <tr>
+                    <td>
+                      <a href="/routine/{{this._id}}/">{{this.name}} Change this link!</a>
+                    </td>
+                    <td>
+                      {{this.description}}
+                    </td>
+                    <td>
+                      {{moment date format="MMMM Do YYYY, h:mm:ss a"}}
+                    </td>
+                  </tr>
+                </tbody>
+                {{/each}}
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br>
+      <br>
+
+
+
+    </div>
+  </div>

@@ -46,6 +46,13 @@
   </div>
 </div>
 
+<!-- CHANGE PROFILE PIC FORM-->
+<form action="/profile/editPhoto/" method="POST" id="editPhoto" enctype="multipart/form-data">
+  <label for="photo">Profile Photo</label><br>
+  <input type="file" name="photo">
+  <button type="submit" value="SAVE" form="editPhoto">Save changes</button>
+</form>
+
 
 
 <!-- Button trigger modal -->
@@ -65,11 +72,11 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="/profile/edit/" method="POST" id="editUserProfile" enctype="multipart/form-data">
+        <form action="/profile/edit/" method="POST" id="editUserProfile">
           <label for="displayName">Display Name</label><br>
-          <input type="text" class="form-control" name="displayName" value="{{info.displayName}}"><br>
+          <input type="text" class="form-control" name="displayName" value="{{info.displayName}}" required><br>
           <label for="username">Username</label><br>
-          <input type="text" class="form-control" name="username" value="{{info.username}}"><br>
+          <input type="text" class="form-control" name="username" value="{{info.username}}" required><br>
           <label for="location">Location</label><br>
           <input type="text" class="form-control" name="location" value="{{info.location}}"><br>
           <label for="training">What kind of fitness activities do you like?</label><br>
@@ -78,13 +85,19 @@
           <input type="text" class="form-control" name="goal" value="{{info.goal}}"><br>
           <label for="bio">About you</label><br>
           <input type="text" class="form-control" name="bio" value="{{info.bio}}"><br>
-          <label for="photo">Profile Photo</label><br>
+
+          {{!-- {{#if info.img}}
+          <img src="{{info.img}}">
+          Change Profile Pic
+          {{else}}
+          <label for="photo">Upload Photo</label><br>
           <input type="file" name="photo">
+          {{/if}} --}}
         </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary" value="SAVE" form="editUserProfile">Save changes</button>
+        <button type="submit" class="btn btn-primary" form="editUserProfile">Save changes</button>
       </div>
     </div>
   </div>

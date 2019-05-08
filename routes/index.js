@@ -51,11 +51,30 @@ router.get('/profile', isLoggedIn, (req, res, next) => {
 });
 
 //======================Edit User Profile=============================
-router.post('/profile/edit/', uploadCloud.single('photo'), isLoggedIn, (req, res, next) => {
-  let img = req.file.url;
-  // console.log('dsadsdasasad', img)
+// router.post('/profile/edit/', uploadCloud.single('photo'), isLoggedIn, (req, res, next) => {
+
+//   let img = ""
+//   if (req.file) {
+//     img = req.file.url;
+//   }
+
+//   // ! NEED AN IF STATEMENT SO IF YOU SUBMIT THE FORM WITHOUT A NEW IMG.. IT KEEPS CURRENT IMAGE!
+//   let { displayName, username, location, training, goal, bio } = req.body
+//   User.findByIdAndUpdate(req.session.currentUser._id, { displayName, username, location, training, goal, bio, img })
+//     .then(exercise => {
+//       res.redirect(req.get('referer'));
+//     })
+//     .catch(err => {
+//       next(err)
+//     })
+// })
+
+router.post('/profile/edit/', isLoggedIn, (req, res, next) => {
+
+
+  // ! NEED AN IF STATEMENT SO IF YOU SUBMIT THE FORM WITHOUT A NEW IMG.. IT KEEPS CURRENT IMAGE!
   let { displayName, username, location, training, goal, bio } = req.body
-  User.findByIdAndUpdate(req.session.currentUser._id, { displayName, username, location, training, goal, bio, img })
+  User.findByIdAndUpdate(req.session.currentUser._id, { displayName, username, location, training, goal, bio })
     .then(exercise => {
       res.redirect(req.get('referer'));
     })
@@ -65,10 +84,29 @@ router.post('/profile/edit/', uploadCloud.single('photo'), isLoggedIn, (req, res
 })
 
 
+
+//=========================CHANGE PROFILE PIC=============================
+
+router.post('/profile/editPhoto/', uploadCloud.single('photo'), isLoggedIn, (req, res, next) => {
+
+  let img = req.file.url;
+
+  // ! NEED AN IF STATEMENT SO IF YOU SUBMIT THE FORM WITHOUT A NEW IMG.. IT KEEPS CURRENT IMAGE!
+  User.findByIdAndUpdate(req.session.currentUser._id, { img })
+    .then(exercise => {
+      res.redirect(req.get('referer'));
+    })
+    .catch(err => {
+      next(err)
+    })
+})
+
 //============================ Community Profiles===========================
 
 
 router.get('/profile/:id', isLoggedIn, (req, res, next) => {
+  //! PASSING USER BUT IT ALSO CHANGES THE NAVBAR CURRENT USER TO THE USER'S PROFILE NAME.
+
   User.findById(req.params.id).then((user) => {
     Routine.find({ userId: user })
       .then(routines => {
