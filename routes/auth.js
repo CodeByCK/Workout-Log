@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const User = require("../models/User");
+const axios = require("axios")
 
 //encrypt passwords
 const bcrypt = require("bcrypt");
@@ -112,7 +113,7 @@ router.post("/signup", (req, res, next) => {
 
 //================= IF CURRENT USER IS LOGGED IN =================
 function isLoggedIn(req, res, next) {
-  console.log(req.session)
+  // console.log(req.session)
   if (req.session.currentUser) {
     next();
   } else {
@@ -121,9 +122,21 @@ function isLoggedIn(req, res, next) {
 }
 
 router.get("/dashboard", isLoggedIn, (req, res, next) => {
-  console.log(req.session)
-  res.render("dashboard", { user: req.session.currentUser });
+
+  axios.get('http://quotesondesign.com/wp-json/posts?filter[orderby]=rand&filter[posts_per_page]=1')
+
+    .then(random => {
+      let theApi = random.data[0].content
+      console.log("---------------------------------------------", theApi);
+      res.render("dashboard", { user: req.session.currentUser, theApi: theApi });
+
+    }).catch(err => { console.error(err) })
+
+
 });
+
+
+
 
 
 //=====================LOG OUT=================================

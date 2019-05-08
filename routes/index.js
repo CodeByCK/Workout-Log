@@ -2,9 +2,11 @@ const express = require('express');
 const router = express.Router();
 const User = require("../models/User");
 const Routine = require("../models/Routine");
+const Exercise = require("../models/Exercise");
 const uploadCloud = require('../config/cloudinary.js');
 const bcrypt = require("bcrypt");
 const bcryptSalt = 10;
+const axios = require("axios")
 
 function isLoggedIn(req, res, next) {
   console.log(req.session)
@@ -84,8 +86,6 @@ router.get('/profile', isLoggedIn, (req, res, next) => {
 
 router.post('/profile/edit/', isLoggedIn, (req, res, next) => {
 
-
-  // ! NEED AN IF STATEMENT SO IF YOU SUBMIT THE FORM WITHOUT A NEW IMG.. IT KEEPS CURRENT IMAGE!
   let { displayName, username, location, training, goal, bio } = req.body
   User.findByIdAndUpdate(req.session.currentUser._id, { displayName, username, location, training, goal, bio })
     .then(exercise => {
@@ -104,7 +104,7 @@ router.post('/profile/editPhoto/', uploadCloud.single('photo'), isLoggedIn, (req
 
   let img = req.file.url;
 
-  // ! NEED AN IF STATEMENT SO IF YOU SUBMIT THE FORM WITHOUT A NEW IMG.. IT KEEPS CURRENT IMAGE!
+
   User.findByIdAndUpdate(req.session.currentUser._id, { img })
     .then(exercise => {
       res.redirect(req.get('referer'));
@@ -118,18 +118,41 @@ router.post('/profile/editPhoto/', uploadCloud.single('photo'), isLoggedIn, (req
 
 
 router.get('/profile/:id', isLoggedIn, (req, res, next) => {
-  //! PASSING USER BUT IT ALSO CHANGES THE NAVBAR CURRENT USER TO THE USER'S PROFILE NAME.
 
   User.findById(req.params.id)
     .then((user) => {
       Routine.find({ userId: user })
         .then(routines => {
+          console.log(user)
           res.render(`userProfile`, { routines, user })
         })
     }).catch(err => {
       next(err)
     })
 })
+
+
+
+//============================ Community Profile Exercises ========================
+
+router.get('/profile/:userId/:routineId/', isLoggedIn, (req, res, next) => {
+  // const user = req.session.currentUser
+  User.findById(req.params.userId).then(user => {
+    Routine.findById(req.params.routineId).then((routine) => {
+      Exercise.find({ routineId: routine })
+        .then(exercise => {
+          res.render(`userExercise`, { exercise, routine, user })
+        })
+        .catch(err => {
+          next(err)
+        })
+    })
+  })
+
+})
+
+//==========================API CALL=============================
+
 
 
 

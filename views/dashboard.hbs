@@ -16,9 +16,20 @@
         <div class="col-md-10">
             <div>
                 <h1 class="text-center">Welcome {{user.displayName}}!</h1>
-                <p> <strong>Ideas for content:</strong><br><br> Twitter posts from fitness websites<br>
-                    maybe blogs are well.
+
+                Quote of the day:<div id="the-api"></div>
+
+
+
                 </p>
             </div>
         </div>
     </div>
+
+    <script>
+        axios.get("http://quotes.rest/qod.json?category=inspire").then(res => {
+            console.log(res.data.contents.quotes[0].quote)
+            document.getElementById("the-api").innerHTML = `<div class="blockquote"><p>${res.data.contents.quotes[0].quote}</p></div>`
+        })
+
+    </script>

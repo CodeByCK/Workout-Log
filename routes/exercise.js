@@ -37,7 +37,6 @@ router.get('/routine/:id/', isLoggedIn, (req, res, next) => {
 
 
 //==========Send form info to database==========
-///? THE ROUTE: /routine/details/:id{{routine.id}}/new
 
 
 router.post('/routine/:id/', isLoggedIn, (req, res, next) => {

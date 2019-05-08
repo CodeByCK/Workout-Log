@@ -1,80 +1,3 @@
-{{!-- <div class="container-fluid mt-3">
-  <div class="row">
-    <div class="col-md-2">
-      <ul class="nav flex-column nav-pills">
-        <li class="nav-item">
-          <a class="nav-link" href="/dashboard">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/routine">Routines</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link active" href="/community">Community</a>
-        </li>
-      </ul>
-    </div>
-
-    <div class="col-md-10">
-      {{!-- BIO: {{user.bio}}
-      LOCATION: {{user.location}}
-      {{#if user.img}}
-      <img src="{{this.img}}">
-      {{else}}
-      <img src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120">
-      {{/if}}
-
-      <h1 class="text-center">{{user.displayName}}'s Profile</h1>
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th>
-              Routine Name
-            </th>
-            <th>
-              Description
-            </th>
-            <th>
-              Date Created
-            </th>
-          </tr>
-        </thead>
-        {{#each routines}}
-        <tbody>
-          <tr>
-            <td>
-              <a href="/routine/{{this._id}}/">{{this.name}} Change this link!</a>
-            </td>
-            <td>
-              {{this.description}}
-            </td>
-            <td>
-              {{moment date format="MMMM Do YYYY, h:mm:ss a"}}
-            </td>
-          </tr>
-        </tbody>
-        {{/each}}
-      </table> 
-
-      <h1>Hello</h1>
-    </div>
-  </div> --}}
-
-
-
-
-
-
-
-{{!-- {{#each routines}}
-name: {{this.name}}
-description: {{this.description}}
-{{/each}} --}}
-
-
-
-
-
-
 <div class="container-fluid mt-3">
   <div class="row">
     <div class="col-md-2">
@@ -130,34 +53,38 @@ description: {{this.description}}
           </div>
           <div class="col-md-9">
             <div class="profile-content">
-              <h3 class="text-center">{{user.displayName}}'s Activity</h3>
-              <table class="table table-bordered">
+              <h3 class="text-center">{{routine.name}}</h3>
+              <table class="table">
                 <thead>
                   <tr>
                     <th>
-                      Routine Name
+                      Exercise
                     </th>
                     <th>
-                      Description
+                      Sets
                     </th>
                     <th>
-                      Date Created
+                      Reps
+                    </th>
+                    <th>
+                      Weight
                     </th>
                   </tr>
                 </thead>
-
-                {{#each routines}}
+                {{#each exercise}}
                 <tbody>
                   <tr>
                     <td>
-                      <a href="/{{this._id}}/" id="routine-link">{{this.name}}</a>
-
+                      {{this.name}}
                     </td>
                     <td>
-                      {{this.description}}
+                      {{this.sets}}
                     </td>
                     <td>
-                      {{moment date format="MMMM Do YYYY, h:mm:ss a"}}
+                      {{this.reps}}
+                    </td>
+                    <td>
+                      {{this.weight}}
                     </td>
                   </tr>
                 </tbody>
@@ -174,11 +101,3 @@ description: {{this.description}}
 
     </div>
   </div>
-
-  <script>
-    let rlinks = document.querySelectorAll("#routine-link");
-    for (let i = 0; i < rlinks.length; i++) {
-      let url = window.location.href + "/" + rlinks[i].href.split("/")[3]
-      rlinks[i].href = url;
-    }
-  </script>
