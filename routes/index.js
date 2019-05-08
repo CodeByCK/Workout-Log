@@ -44,11 +44,24 @@ router.get('/profile', isLoggedIn, (req, res, next) => {
   const user = req.session.currentUser
   User.findById(user._id)
     .then(info => {
-      res.render('profile', { info, user });
+      Routine.find({ userId: user })
+        .then(routines => {
+          res.render('profile', { info, user, routines });
+        })
+
     }).catch(err => {
       next(err)
     })
 });
+
+// Routine.find({ userId: user })
+// .then(routines => {
+//   res.render("routine/index", { routines, user });
+// }).catch(err => {
+//   next(err)
+// })
+// });
+
 
 //======================Edit User Profile=============================
 // router.post('/profile/edit/', uploadCloud.single('photo'), isLoggedIn, (req, res, next) => {
@@ -107,14 +120,15 @@ router.post('/profile/editPhoto/', uploadCloud.single('photo'), isLoggedIn, (req
 router.get('/profile/:id', isLoggedIn, (req, res, next) => {
   //! PASSING USER BUT IT ALSO CHANGES THE NAVBAR CURRENT USER TO THE USER'S PROFILE NAME.
 
-  User.findById(req.params.id).then((user) => {
-    Routine.find({ userId: user })
-      .then(routines => {
-        res.render(`userProfile`, { routines, user })
-      })
-  }).catch(err => {
-    next(err)
-  })
+  User.findById(req.params.id)
+    .then((user) => {
+      Routine.find({ userId: user })
+        .then(routines => {
+          res.render(`userProfile`, { routines, user })
+        })
+    }).catch(err => {
+      next(err)
+    })
 })
 
 

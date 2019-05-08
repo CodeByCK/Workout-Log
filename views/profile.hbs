@@ -3,7 +3,7 @@
     <div class="col-md-2">
       <ul class="nav flex-column nav-pills">
         <li class="nav-item">
-          <a class="nav-link" href="/dashboard">Home</a>
+          <a class="nav-link active" href="/dashboard">Home</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/routine">Routines</a>
@@ -14,53 +14,100 @@
       </ul>
     </div>
     <div class="col-md-10">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-md-12">
-            <h1>{{info.displayName}}</h1>
+      <a href="/routine">BACK</a>
+      <div class="container">
+        <div class="row profile">
+          <div class="col-md-3">
+            <div class="profile-sidebar">
+              <!-- SIDEBAR USERPIC -->
+              <div class="profile-userpic text-center">
+                {{#if info.img}}
+                <img src="{{info.img}}" class="img-responsive" alt="">
+                {{else}}
+                <img
+                  src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120"
+                  class="img-responsive" alt="">
+                {{/if}}
+                <div class="row">
+                  <div class="col-sm-12">
+                    <a href="" class="text-center" data-toggle="modal" data-target="#changePhoto">
+                      Change Picture
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <!-- END SIDEBAR USERPIC -->
+              <!-- SIDEBAR USER TITLE -->
+              <div class="profile-usertitle">
+                <div class="profile-usertitle-name">
+                  {{user.displayName}}
+                </div>
+                <div class="profile-usermenu text-left">
+                  <i class="fas fa-map-marker-alt"></i> Location: {{info.location}}
+                </div>
+                <div class="profile-usermenu text-left">
+                  <i class="fas fa-bullseye"></i> Fitness Goal: {{info.goal}}
+                </div>
+                <div class="profile-usermenu text-left">
+                  <i class="fas fa-running"></i> Training: {{info.training}}
+                </div>
+                <div class="profile-usermenu text-left">
+                  <i class="fas fa-user"></i> About Me:<br><br>{{info.bio}}
+                </div>
+                <div class="profile-usermenu text-left">
+                  <a href="" data-toggle="modal" data-target="#editProfile">
+                    Edit Profile
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-        </class>
-        <div class="row">
-          <div class="col-md-6">
-            <img src="{{info.img}}">
-          </div>
-          <div class="col-md-6">
-            location: {{info.location}}<br>
-            training: {{info.training}}<br>
-            goal: {{info.goal}}<br>
-            bio: {{info.bio}}<br>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editProfile">
-              Edit Profile
-            </button>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
+          <div class="col-md-9">
+            <div class="profile-content">
+              <h3 class="text-center">My Activity</h3>
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>
+                      Routine Name
+                    </th>
+                    <th>
+                      Description
+                    </th>
+                    <th>
+                      Date Created
+                    </th>
+                  </tr>
+                </thead>
+                {{#each routines}}
+                <tbody>
+                  <tr>
+                    <td>
+                      <a href="/routine/{{this._id}}/">{{this.name}}</a>
+                    </td>
+                    <td>
+                      {{this.description}}
+                    </td>
+                    <td>
+                      {{moment date format="MMMM Do YYYY, h:mm:ss a"}}
+                    </td>
+                  </tr>
+                </tbody>
+                {{/each}}
+              </table>
+            </div>
           </div>
         </div>
       </div>
-      <div>
-      </div>
+      <br>
+      <br>
     </div>
   </div>
 </div>
 
-<!-- CHANGE PROFILE PIC FORM-->
-<form action="/profile/editPhoto/" method="POST" id="editPhoto" enctype="multipart/form-data">
-  <label for="photo">Profile Photo</label><br>
-  <input type="file" name="photo">
-  <button type="submit" value="SAVE" form="editPhoto">Save changes</button>
-</form>
 
 
-
-<!-- Button trigger modal -->
-{{!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editProfile">
-  Edit Profile
-</button> --}}
-
-<!-- Modal -->
+<!---------------------------------- EDIT PROFILE INFO MODAL ------------------------------>
 <div class="modal fade" id="editProfile" tabindex="-1" role="dialog" aria-labelledby="editProfileLabel"
   aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -85,19 +132,41 @@
           <input type="text" class="form-control" name="goal" value="{{info.goal}}"><br>
           <label for="bio">About you</label><br>
           <input type="text" class="form-control" name="bio" value="{{info.bio}}"><br>
-
-          {{!-- {{#if info.img}}
-          <img src="{{info.img}}">
-          Change Profile Pic
-          {{else}}
-          <label for="photo">Upload Photo</label><br>
-          <input type="file" name="photo">
-          {{/if}} --}}
         </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="submit" class="btn btn-primary" form="editUserProfile">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!------------------------- EDIT PHOTO MODAL--------------------------->
+
+<div class="modal fade" id="changePhoto" tabindex="-1" role="dialog" aria-labelledby="changePhotoLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="changePhotoLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="/profile/editPhoto/" method="POST" id="editPhoto" enctype="multipart/form-data">
+          <label for="photo">Profile Photo</label><br>
+          <input type="file" name="photo">
+          {{!-- <button type="submit" value="SAVE" class="btn btn-primary" form="editPhoto">Save changes</button> --}}
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" value="SAVE" class="btn btn-primary" form="editPhoto">Save changes</button>
       </div>
     </div>
   </div>

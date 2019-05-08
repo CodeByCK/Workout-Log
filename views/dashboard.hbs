@@ -16,14 +16,9 @@
         <div class="col-md-10">
             <div>
                 <h1 class="text-center">Welcome {{user.displayName}}!</h1>
-                <h1><a href="/routine">MY ROUTINES</a></h1>
+                <p> <strong>Ideas for content:</strong><br><br> Twitter posts from fitness websites<br>
+                    maybe blogs are well.
+                </p>
             </div>
-            {{#if user}}
-            <a href="/logout">Logout</a>
-            {{else}}
-            <h1><a href="/login"> LOG IN</a></h1>
-            <h1><a href="/signup"> SIGN UP</a></h1>
-            {{/if}}
         </div>
     </div>
-</div>
