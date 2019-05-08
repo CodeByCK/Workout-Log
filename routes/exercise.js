@@ -17,7 +17,6 @@ function isLoggedIn(req, res, next) {
 }
 
 
-
 //====================SHOW ALL EXERCISES FOR ROUTINE==================
 
 router.get('/routine/:id/', isLoggedIn, (req, res, next) => {
@@ -78,8 +77,6 @@ router.post('/editExercise', isLoggedIn, (req, res, next) => {
       next(err)
     })
 })
-
-
 
 
 module.exports = router;

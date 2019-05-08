@@ -17,17 +17,6 @@ router.get('/login', (req, res, next) => {
   res.render('auth/login')
 })
 
-// router.get('/routine', isLoggedIn, (req, res, next) => {
-//   const user = req.session.currentUser
-
-//   Routine.find({ userId: user })
-//     .then(routines => {
-//       res.render("routine/index", { routines, user });
-//     }).catch(err => {
-//       next(err)
-//     })
-// });
-
 
 // ========================LOGIN==================================
 router.post("/login", (req, res, next) => {
@@ -135,7 +124,6 @@ router.get("/dashboard", isLoggedIn, (req, res, next) => {
   console.log(req.session)
   res.render("dashboard", { user: req.session.currentUser });
 });
-
 
 
 //=====================LOG OUT=================================

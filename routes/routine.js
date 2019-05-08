@@ -31,7 +31,6 @@ router.get('/routine', isLoggedIn, (req, res, next) => {
 
 
 
-
 //===============ADD NEW ROUTINES=====================
 
 
@@ -47,7 +46,6 @@ router.post('/routine/new', isLoggedIn, (req, res, next) => {
       next(err)
     })
 })
-
 
 
 //===============EDIT ROUTINE========================
@@ -74,7 +72,6 @@ router.get('/routine/delete', isLoggedIn, (req, res, next) => {
       next(error);
     })
 })
-
 
 
 module.exports = router;

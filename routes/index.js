@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const User = require("../models/User");
+const Routine = require("../models/Routine");
+const uploadCloud = require('../config/cloudinary.js');
 const bcrypt = require("bcrypt");
 const bcryptSalt = 10;
 
@@ -21,11 +23,6 @@ router.get('/', (req, res, next) => {
 router.get('/faq', (req, res, next) => {
   res.render('faq', { user: req.session.currentUser });
 });
-
-// router.get('/profile', isLoggedIn, (req, res, next) => {
-//   res.render('profile', { user: req.session.currentUser });
-// });
-
 
 
 //======================Showing all users in community page================
@@ -53,21 +50,33 @@ router.get('/profile', isLoggedIn, (req, res, next) => {
     })
 });
 
-//======================Edit profile=============================
-router.post('/profile/edit/', isLoggedIn, (req, res, next) => {
-  // const user = req.session.currentUser
-  console.log('wexwexwexwxkexelclr/c', req.session.currentUser._id)
+//======================Edit User Profile=============================
+router.post('/profile/edit/', uploadCloud.single('photo'), isLoggedIn, (req, res, next) => {
+  let img = req.file.url;
+  // console.log('dsadsdasasad', img)
   let { displayName, username, location, training, goal, bio } = req.body
-
-  User.findByIdAndUpdate(req.session.currentUser._id, { displayName, username, location, training, goal, bio })
+  User.findByIdAndUpdate(req.session.currentUser._id, { displayName, username, location, training, goal, bio, img })
     .then(exercise => {
       res.redirect(req.get('referer'));
-      // res.redirect('/profile')
-      // res.json(exercise)
     })
     .catch(err => {
       next(err)
     })
+})
+
+
+//============================ Community Profiles===========================
+
+
+router.get('/profile/:id', isLoggedIn, (req, res, next) => {
+  User.findById(req.params.id).then((user) => {
+    Routine.find({ userId: user })
+      .then(routines => {
+        res.render(`userProfile`, { routines, user })
+      })
+  }).catch(err => {
+    next(err)
+  })
 })
 
 

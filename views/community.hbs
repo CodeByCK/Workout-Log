@@ -22,14 +22,17 @@
           {{#each allUsers}}
           <div class="col-xs-2">
             <div class="user">
-              <img class="profile-img"
+              {{#if this.img}}
+              <img class="user-img" src="{{this.img}}" alt="">
+              {{else}}
+              <img class="user-img"
                 src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120"
                 alt="">
+              {{/if}}
               <h3 class="lead" align='center'>
-                {{this.username}}
-                {{this.location}}
-                {{this.goal}}
+                {{this.displayName}}
               </h3>
+              <a href="/profile/{{_id}}">View Profile</a>
             </div>
           </div>
           {{/each}}
