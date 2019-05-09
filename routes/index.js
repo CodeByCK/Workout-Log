@@ -22,9 +22,13 @@ router.get('/', (req, res, next) => {
   res.render('home', { user: req.session.currentUser })
 });
 
-router.get('/faq', (req, res, next) => {
-  res.render('faq', { user: req.session.currentUser });
+router.get('/about', (req, res, next) => {
+  res.render('about', { user: req.session.currentUser });
 });
+
+router.get('/weightCalculator', (req, res, next) => {
+  res.render('weightCalculator', { user: req.session.currentUser })
+})
 
 
 //======================Showing all users in community page================

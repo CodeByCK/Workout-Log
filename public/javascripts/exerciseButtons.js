@@ -1,6 +1,6 @@
 
 
-//======delete======
+//===========================delete==========================
 let deleteBtns = document.querySelectorAll("#delete-btn");
 for (let i = 0; i < deleteBtns.length; i++) {
   deleteBtns[i].addEventListener("click", (e) => {
@@ -13,7 +13,7 @@ for (let i = 0; i < deleteBtns.length; i++) {
 
 
 
-//=======edit ======
+//==============================edit ============================
 let editBtns = document.querySelectorAll("#edit-btn");
 for (let i = 0; i < editBtns.length; i++) {
   editBtns[i].addEventListener("click", (e) => {
