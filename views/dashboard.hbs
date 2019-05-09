@@ -1,6 +1,6 @@
 <div class="container-fluid mt-3">
     <div class="row">
-        <div class="col-md-2">
+        <div class="col-md-2 mb-5">
             <ul class="nav flex-column nav-pills">
                 <li class="nav-item">
                     <a class="nav-link active" href="/dashboard">Home</a>
@@ -15,21 +15,78 @@
         </div>
         <div class="col-md-10">
             <div>
-                <h1 class="text-center">Welcome {{user.displayName}}!</h1>
+                <h1 class="text-center mb-3">{{user.displayName}}'s Dashboard</h1>
+            </div>
+            <div class="card mb-5">
+                <div class="card-header">
+                    Quote of the day
+                </div>
+                <div class="card-body">
+                    <blockquote class="blockquote mb-0">
+                        <p id="the-api"></p>
+                        <footer class="blockquote-footer"><cite title="Source Title">
+                                <p id="author"></p>
+                            </cite></footer>
+                    </blockquote>
+                </div>
+            </div>
 
-                Quote of the day:<div id="the-api"></div>
 
 
 
-                </p>
+            <div class="container-fluid">
+                <div class="row mb-5">
+                    <div class="col-lg-4 mb-2">
+                        <div class="card text-center" style="width: 18rem;">
+                            <div class="card-body">
+                                <h5 class="card-title"> Nutrition Tips</h5>
+                                <a class="twitter-timeline" href="https://twitter.com/thefoodbabe?ref_src=twsrc%5Etfw"
+                                    data-width="300" data-height="300">Tweets by
+                                    thefoodbabe</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 mb-2">
+                        <div class="card text-center" style="width: 18rem;">
+                            <div class="card-body">
+                                <h5 class="card-title"> Bodybuilding Tips</h5>
+                                <a class="twitter-timeline"
+                                    href="https://twitter.com/Bodybuildingcom?ref_src=twsrc%5Etfw" data-width="300"
+                                    data-height="300">Tweets by
+                                    bodybuilding.com</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 mb-2">
+                        <div class="card text-center" style="width: 18rem;">
+                            <div class="card-body">
+                                <h5 class="card-title"> Daily Fitness Tips</h5>
+                                <a class="twitter-timeline"
+                                    href="https://twitter.com/DailyFitnessTip?ref_src=twsrc%5Etfw" data-width="300"
+                                    data-height="300">Tweets by
+                                    Daily Fitness Tips</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
+
+
+
+
+
+
     <script>
         axios.get("http://quotes.rest/qod.json?category=inspire").then(res => {
-            console.log(res.data.contents.quotes[0].quote)
-            document.getElementById("the-api").innerHTML = `<div class="blockquote"><p>${res.data.contents.quotes[0].quote}</p></div>`
+            console.log(res.data.contents.quotes[0].author)
+            let author = res.data.contents.quotes[0].author
+            document.getElementById("the-api").innerHTML = `${res.data.contents.quotes[0].quote}`
+            document.getElementById("author").innerHTML = `${res.data.contents.quotes[0].author}`
         })
 
     </script>
+
+    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
