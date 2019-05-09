@@ -14,7 +14,9 @@ const MongoStore = require("connect-mongo")(session);
 
 
 mongoose
-  .connect('mongodb://localhost/workout-log', { useNewUrlParser: true })
+  //.connect('mongodb://localhost/workout-log', { useNewUrlParser: true })
+  .connect('mongodb+srv://ironhack:ironhack@cluster0-rgqwa.mongodb.net/test?retryWrites=true',
+    { useNewUrlParser: true })
   .then(x => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })
