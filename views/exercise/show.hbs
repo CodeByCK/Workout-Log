@@ -12,14 +12,14 @@
           <a class="nav-link" href="/community">Community</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/weightCalculator">Weight Calculator</a>
+          <a class="nav-link" href="/weightCalculator">Weight Loss Calculator</a>
         </li>
       </ul>
     </div>
     <div class="col-md-10">
       <a href="../">BACK</a><br>
 
-      <h1 class="text-center">{{routine.name}}</h1>
+      <h1 class="text-center text-primary">{{routine.name}}</h1>
       <div class="row">
         <div class="col-md-12 text-center mb-3">
           <a href="" data-toggle="modal" data-target="#editRoutine">
@@ -155,8 +155,8 @@
 </div>
 </div>
 
-<!-- ADD EXERCISE MODAL-->
-<!-- Button trigger modal -->
+<!-- EDIT EXERCISE MODAL-->
+
 
 <div class="modal fade" id="editRoutine" tabindex="-1" role="dialog" aria-labelledby="editRoutineLabel"
   aria-hidden="true">
@@ -168,6 +168,10 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
+
+
+
+
       <div class="modal-body">
         <form action="/routine/edit?id={{routine._id}}" method="POST" id="editRoutineName">
           <div class="form-group row">
@@ -185,6 +189,14 @@
           </div>
           {{!-- <button type="submit">SUBMIT</button> --}}
         </form>
+
+
+
+
+
+
+
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

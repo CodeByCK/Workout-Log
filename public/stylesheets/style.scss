@@ -114,15 +114,15 @@ header .overlay {
 
 .user-img
 {
-    width: 96px;
-    height: 96px;
+    width: 120px;
+    height: 120px;
     margin: 0 auto 10px;
     display: block;
     -moz-border-radius: 50%;
     -webkit-border-radius: 50%;
     border-radius: 50%;
+    object-fit: cover;
 }
-
 .user {
     padding:0 10px 10px;
     min-height:150px;
@@ -146,11 +146,12 @@ header .overlay {
 .profile-userpic img {
   float: none;
   margin: 0 auto;
-  width: 70%;
-  height: 50%;
+  width: 14em;
+  height: 14em;
   -webkit-border-radius: 50% !important;
   -moz-border-radius: 50% !important;
   border-radius: 50% !important;
+  object-fit: cover;
 }
 
 .profile-usertitle {
