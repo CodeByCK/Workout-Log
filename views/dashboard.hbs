@@ -83,7 +83,7 @@
 
 
     <script>
-        axios.get("http://quotes.rest/qod.json?category=inspire").then(res => {
+        axios.get("https://quotes.rest/qod.json?category=inspire").then(res => {
             console.log(res.data.contents.quotes[0].author)
             let author = res.data.contents.quotes[0].author
             document.getElementById("the-api").innerHTML = `${res.data.contents.quotes[0].quote}`
