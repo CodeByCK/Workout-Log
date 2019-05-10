@@ -2,7 +2,7 @@
   /*height: 600px;*/
   position: relative;
   padding: 50px 0;
-  background-color: #007AFE
+  background-color: #008cba;
 }
 
 .testim .wrap {
@@ -39,7 +39,7 @@
 }
 
 .testim .arrow:hover {
-    color: #2b288d;
+    color: #ffff
 }
     
 
@@ -81,8 +81,8 @@
 
 .testim .dots .dot.active,
 .testim .dots .dot:hover {
-    background: #2b288d;
-    border-color: #2b288d;
+    background: #ffff;
+    border-color: #ffff;
 }
 
 .testim .dots .dot.active {
@@ -127,7 +127,7 @@
 }
 
 .testim .cont div .h4 {
-    color: #2b288d;
+    color: #ffff;
     font-size: 1.2em;
     margin: 15px 0;
 }

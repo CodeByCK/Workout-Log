@@ -7,6 +7,26 @@ a {
   color: #00B7FF;
 }
 
+.nav-logo{
+  width: 200px;
+  height: auto;
+  margin-left:20px;
+  padding-bottom:10px;
+}
+
+.navbar-brand{
+  padding-top: 0;
+  height:80px;
+  width: auto;
+}
+
+.navbar{
+  padding-top: 0;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+
 #form {
   margin: 30px auto;
   width: 380px;
@@ -257,4 +277,32 @@ blockquote:before {
 }
 blockquote p {
   display: inline;
+}
+
+.btn-primary{
+  color: #fff;
+    background-color: #008cba;
+    border-color: #008cba;
+    width: 46px;
+    border-radius: 20px;
+}
+
+.btn-secondary {
+  color: #222;
+  background-color: #eee;
+  border-color: #eee;
+  width: 67px;
+  border-radius: 20px;
+}
+
+.nav-pills .active {
+  border: 1px solid #0079a1;
+  border-radius: 13px;
+}
+
+.btn-self {
+  color: #fff;
+  background-color: #008cba;
+  border-color: #008cba;
+  border-radius: 20px;
 }
