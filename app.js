@@ -67,7 +67,7 @@ app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 
 
 // default value for title local
-app.locals.title = 'Workout Tracker';
+app.locals.title = 'Iron Lift | Ultimate Workout Log';
 
 
 // Routes
