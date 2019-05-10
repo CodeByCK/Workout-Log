@@ -6,21 +6,8 @@ body {
 a {
   color: #00B7FF; }
 
-.nav-logo {
-  width: 200px;
-  height: auto;
-  margin-left: 20px;
-  padding-bottom: 10px; }
-
-.navbar-brand {
-  padding-top: 0;
-  height: 80px;
-  width: auto; }
-
 .navbar {
-  padding-top: 0;
-  padding-right: 10px;
-  padding-left: 10px; }
+  padding: 20px; }
 
 #form {
   margin: 30px auto;
@@ -268,5 +255,18 @@ blockquote p {
   border-color: #008cba;
   width: 220px;
   border-radius: 20px; }
+
+.hero-logo {
+  width: 100%;
+  max-width: 500px;
+  margin-bottom: 0; }
+
+hr.style14 {
+  border: 0;
+  margin-top: -20px;
+  width: 60%;
+  height: 1.5px;
+  background: white;
+  background: radial-gradient(circle, white 0%, rgba(9, 9, 121, 0) 100%, rgba(0, 212, 255, 0) 100%); }
 
 /*# sourceMappingURL=style.css.map */

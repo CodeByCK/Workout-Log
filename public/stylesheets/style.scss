@@ -7,23 +7,21 @@ a {
   color: #00B7FF;
 }
 
-.nav-logo{
-  width: 200px;
-  height: auto;
-  margin-left:20px;
-  padding-bottom:10px;
-}
+// .nav-logo{
+//   width: 200px;
+//   height: auto;
+//   margin-left:20px;
+//   padding-bottom:10px;
+// }
 
-.navbar-brand{
-  padding-top: 0;
-  height:80px;
-  width: auto;
-}
+// .navbar-brand{
+//   padding-top: 0;
+//   height:80px;
+//   width: auto;
+// }
 
 .navbar{
-  padding-top: 0;
-  padding-right: 10px;
-  padding-left: 10px;
+padding: 20px;
 }
 
 
@@ -323,3 +321,18 @@ blockquote p {
   border-radius: 20px;
 }
 
+
+.hero-logo{
+  width: 100%;
+  max-width: 500px;
+  margin-bottom: 0;
+}
+
+hr.style14 { 
+  border: 0; 
+  margin-top:-20px;
+  width:60%;
+  height: 1.5px; 
+  background: rgb(255,255,255);
+  background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(9,9,121,0) 100%, rgba(0,212,255,0) 100%);
+}
