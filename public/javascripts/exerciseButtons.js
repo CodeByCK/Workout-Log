@@ -28,7 +28,7 @@ for (let i = 0; i < editBtns.length; i++) {
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="editExerciseLabel">Add Exercise</h5>
+        <h5 class="modal-title" id="editExerciseLabel">Edit Exercise</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -43,7 +43,7 @@ for (let i = 0; i < editBtns.length; i++) {
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary" id="submitEdit" exerciseId=${exerciseId}>Save Changes</button>
+        <button type="submit" class="btn btn-primary" id="submitEdit" exerciseId=${exerciseId}>Save</button>
       </div>
     </div>
   </div>
